@@ -24,6 +24,8 @@ public class ApiConfig {
 
     @Bean
     public WebClient webClient() {
-        return WebClient.builder().clientConnector(new ReactorClientHttpConnector()).build();
+        return WebClient.builder()
+                .clientConnector(new ReactorClientHttpConnector())
+                .build();
     }
 }

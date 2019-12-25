@@ -1,6 +1,6 @@
 package com.linkedin.learning.reactivespring.controller;
 
-import com.linkedin.learning.reactivespring.model.CoinBaseResponse;
+import com.linkedin.learning.reactivespring.model.CoinBasePriceResponse;
 import com.linkedin.learning.reactivespring.service.CoinbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class PriceController {
     private CoinbaseService coinbaseService;
 
     @GetMapping(value = "/{name}")
-    public Mono<CoinBaseResponse> getPrice(@PathVariable String name) {
+    public Mono<CoinBasePriceResponse> getPrice(@PathVariable String name) {
 
         return coinbaseService.getCryptoPrice(name);
     }

@@ -1,17 +1,17 @@
 package com.linkedin.learning.reactivespring.service;
 
-import com.linkedin.learning.reactivespring.model.CoinBaseResponse;
-import com.linkedin.learning.reactivespring.model.Purchase;
+import com.linkedin.learning.reactivespring.model.CoinBasePriceResponse;
+import com.linkedin.learning.reactivespring.model.CoinBasePurchaseResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface CoinbaseService {
 
-    Mono<CoinBaseResponse> getCryptoPrice(String priceName);
+    Mono<CoinBasePriceResponse> getCryptoPrice(String priceName);
 
-    Mono<Purchase> createPurchase(String priceName);
+    Mono<CoinBasePurchaseResponse> createPurchase(String priceName);
 
-    Mono<Purchase> getPurchaseById(String id);
+    Mono<CoinBasePurchaseResponse> getPurchaseById(String id);
 
-    Flux<Purchase> listAllPurchases();
+    Flux<CoinBasePurchaseResponse> listAllPurchases();
 }

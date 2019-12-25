@@ -1,6 +1,6 @@
-package com.linkedin.learning.reactivespring.controller;
+package com.linkedin.learning.reactivespring.handler;
 
-import com.linkedin.learning.reactivespring.model.Purchase;
+import com.linkedin.learning.reactivespring.model.CoinBasePurchaseResponse;
 import com.linkedin.learning.reactivespring.service.CoinbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
@@ -10,7 +10,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class PurchaseHandler {
@@ -19,15 +18,19 @@ public class PurchaseHandler {
     private CoinbaseService coinbaseService;
 
     public Mono<ServerResponse> listPurchases(ServerRequest serverRequest) {
-        final Mono<Purchase> purchase =
+        final Mono<CoinBasePurchaseResponse> purchase =
                 coinbaseService.getPurchaseById(serverRequest.pathVariable("id"));
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(purchase, Purchase.class);
+
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(purchase, CoinBasePurchaseResponse.class);
     }
 
     public Mono<ServerResponse> listAllPurchases(ServerRequest serverRequest) {
-        final Flux<Purchase> purchaseFlux = coinbaseService.listAllPurchases();
+        final Flux<CoinBasePurchaseResponse> purchaseFlux = coinbaseService.listAllPurchases();
 
-        return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-                .body(purchaseFlux.collectList(), new ParameterizedTypeReference<List<Purchase>>() {});
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(purchaseFlux.collectList(), new ParameterizedTypeReference<List<CoinBasePurchaseResponse>>() {});
     }
 }

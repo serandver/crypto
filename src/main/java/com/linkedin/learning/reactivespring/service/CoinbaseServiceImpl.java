@@ -1,7 +1,7 @@
 package com.linkedin.learning.reactivespring.service;
 
-import com.linkedin.learning.reactivespring.model.CoinBaseResponse;
-import com.linkedin.learning.reactivespring.model.Purchase;
+import com.linkedin.learning.reactivespring.model.CoinBasePriceResponse;
+import com.linkedin.learning.reactivespring.model.CoinBasePurchaseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoOperations;
 import org.springframework.stereotype.Service;
@@ -21,28 +21,28 @@ public class CoinbaseServiceImpl implements CoinbaseService {
     private ReactiveMongoOperations reactiveMongoTemplate;
 
     @Override
-    public Mono<CoinBaseResponse> getCryptoPrice(String priceName) {
+    public Mono<CoinBasePriceResponse> getCryptoPrice(String priceName) {
         return webClient.get()
                 .uri("https://api.coinbase.com/v2/prices/{crypto}/buy", priceName)
                 .exchange()
-                .flatMap(clientResponse -> clientResponse.bodyToMono(CoinBaseResponse.class));
+                .flatMap(clientResponse -> clientResponse.bodyToMono(CoinBasePriceResponse.class));
     }
 
     @Override
-    public Mono<Purchase> createPurchase(String priceName) {
+    public Mono<CoinBasePurchaseResponse> createPurchase(String priceName) {
         //Get crypto price from the coinbase API -> then save a mongoDB document containing the price
         return getCryptoPrice(priceName).flatMap(price -> reactiveMongoTemplate.save(
-                new Purchase(priceName, price.getData().getAmount(), LocalDateTime.now())
+                new CoinBasePurchaseResponse(priceName, price.getData().getAmount(), LocalDateTime.now())
         ));
     }
 
     @Override
-    public Mono<Purchase> getPurchaseById(String id) {
-        return reactiveMongoTemplate.findById(id, Purchase.class);
+    public Mono<CoinBasePurchaseResponse> getPurchaseById(String id) {
+        return reactiveMongoTemplate.findById(id, CoinBasePurchaseResponse.class);
     }
 
     @Override
-    public Flux<Purchase> listAllPurchases() {
-        return reactiveMongoTemplate.findAll(Purchase.class);
+    public Flux<CoinBasePurchaseResponse> listAllPurchases() {
+        return reactiveMongoTemplate.findAll(CoinBasePurchaseResponse.class);
     }
 }
