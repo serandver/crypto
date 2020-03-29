@@ -1,7 +1,7 @@
-package com.linkedin.learning.reactivespring.controller;
+package com.crypto.bot.controller;
 
-import com.linkedin.learning.reactivespring.model.CoinBasePriceResponse;
-import com.linkedin.learning.reactivespring.service.CoinbaseService;
+import com.crypto.bot.model.CoinBasePriceResponse;
+import com.crypto.bot.service.CoinbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

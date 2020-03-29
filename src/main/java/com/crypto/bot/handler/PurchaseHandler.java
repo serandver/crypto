@@ -1,7 +1,7 @@
-package com.linkedin.learning.reactivespring.handler;
+package com.crypto.bot.handler;
 
-import com.linkedin.learning.reactivespring.model.CoinBasePurchaseResponse;
-import com.linkedin.learning.reactivespring.service.CoinbaseService;
+import com.crypto.bot.model.CoinBasePurchaseResponse;
+import com.crypto.bot.service.CoinbaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
@@ -31,6 +31,7 @@ public class PurchaseHandler {
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(purchaseFlux.collectList(), new ParameterizedTypeReference<List<CoinBasePurchaseResponse>>() {});
+                .body(purchaseFlux.collectList(), new ParameterizedTypeReference<List<CoinBasePurchaseResponse>>() {
+                });
     }
 }

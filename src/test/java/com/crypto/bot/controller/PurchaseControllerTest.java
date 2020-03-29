@@ -1,6 +1,6 @@
-package com.linkedin.learning.reactivespring.controller;
+package com.crypto.bot.controller;
 
-import com.linkedin.learning.reactivespring.model.CoinBasePurchaseResponse;
+import com.crypto.bot.model.CoinBasePurchaseResponse;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.linkedin.learning.reactivespring;
+package com.crypto.bot;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

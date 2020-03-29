@@ -1,4 +1,4 @@
-package com.linkedin.learning.reactivespring.model;
+package com.crypto.bot.model;
 
 import lombok.Data;
 

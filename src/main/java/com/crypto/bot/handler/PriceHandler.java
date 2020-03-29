@@ -1,7 +1,7 @@
-package com.linkedin.learning.reactivespring.handler;
+package com.crypto.bot.handler;
 
-import com.linkedin.learning.reactivespring.model.CoinBasePriceResponse;
-import com.linkedin.learning.reactivespring.service.CoinbaseService;
+import com.crypto.bot.client.CoinbaseClient;
+import com.crypto.bot.model.CoinBasePriceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -11,11 +11,11 @@ import reactor.core.publisher.Mono;
 public class PriceHandler {
 
     @Autowired
-    private CoinbaseService coinbaseService;
+    private CoinbaseClient coinbaseClient;
 
     public Mono<ServerResponse> getPrice(ServerRequest serverRequest) {
         final Mono<CoinBasePriceResponse> price =
-                coinbaseService.getCryptoPrice(serverRequest.pathVariable("name"));
+                coinbaseClient.getCryptoPrice(serverRequest.pathVariable("name"));
 
         return ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
