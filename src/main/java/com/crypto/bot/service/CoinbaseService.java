@@ -10,7 +10,7 @@ public interface CoinbaseService extends AbstractService {
 
     Mono<CoinBasePurchaseResponse> getPurchaseById(String id);
 
-    Flux<CoinBasePurchaseResponse> listAllPurchases();
+    Flux<CoinBasePurchaseResponse> getAllPurchases();
 
     Mono<CoinBasePriceResponse> getCryptoPrice(String currencyName);
 }

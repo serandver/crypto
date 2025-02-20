@@ -35,7 +35,7 @@ public class CoinbaseServiceImpl implements CoinbaseService {
     }
 
     @Override
-    public Flux<CoinBasePurchaseResponse> listAllPurchases() {
+    public Flux<CoinBasePurchaseResponse> getAllPurchases() {
         return reactiveMongoTemplate.findAll(CoinBasePurchaseResponse.class);
     }
 

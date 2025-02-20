@@ -12,6 +12,7 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 
 @Configuration
@@ -31,13 +32,14 @@ public class WebRouter implements WebFluxConfigurer {
     @Bean
     public RouterFunction<ServerResponse> routerFunctionPurchase(final PurchaseHandler purchaseHandler) {
         return RouterFunctions
-                .route(GET("/coin/purchase/v2/{id}").and(accept(MediaType.APPLICATION_JSON)), purchaseHandler::listPurchases)
-                .andRoute(GET("/coin/purchase/v2/"), purchaseHandler::listAllPurchases);
+                .route(GET("/coin/purchase/v2/{id}").and(accept(MediaType.APPLICATION_JSON)), purchaseHandler::getPurchaseById)
+                .andRoute(GET("/coin/purchase/v2/"), purchaseHandler::getAllPurchases)
+                .andRoute(POST("/coin/purchase/v2/{name}"), purchaseHandler::postPurchase);
     }
 
     @Bean
-    public RouterFunction<ServerResponse> routerFunctionPrice(final PriceHandler priceHandler) {
+    public RouterFunction<ServerResponse> getBuyPrice(final PriceHandler priceHandler) {
         return RouterFunctions
-                .route(GET("/coin/price/v2/"), priceHandler::getPrice);
+                .route(GET("/coin/price/v2/{name}/buy"), priceHandler::getPrice);
     }
 }

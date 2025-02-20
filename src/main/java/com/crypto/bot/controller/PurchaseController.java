@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/coin/purchase/v1")
+@RequestMapping("/coin/purchase/v2")
 public class PurchaseController {
 
     @Autowired
